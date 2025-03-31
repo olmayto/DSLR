@@ -1,10 +1,10 @@
 import sys, math
 import pandas as pd
 
-class Describer():
-	def __init__(self, arg: str):
+class Describer:
+	def __init__(self, dataset):
 		try:
-			self.data = pd.read_csv(arg)
+			self.data = pd.read_csv(dataset)
 		except (FileNotFoundError, Exception) as e:
 			print("Error:", str(e))
 			exit(1)
