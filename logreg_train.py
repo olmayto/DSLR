@@ -5,7 +5,7 @@ import numpy as np
 class Trainer:
 	def __init__(self, dataset, lr=0.01, epochs=1000):
 		try:
-			data = pd.read_csv(dataset).dropna()
+			data = pd.read_csv(dataset).fillna(0)
 		except (FileNotFoundError, Exception) as e:
 			print("Error:", str(e))
 			exit(1)
@@ -15,8 +15,8 @@ class Trainer:
 			).reset_index(drop=True)
 		self.X = (self.X - self.X.mean()) / self.X.std()
 
-		house_map = {"Gryffindor": 0, "Hufflepuff": 1, "Ravenclaw": 2, "Slytherin": 3}
-		self.y = data["Hogwarts House"].map(house_map).reset_index(drop=True)
+		houses_map = {"Gryffindor": 0, "Hufflepuff": 1, "Ravenclaw": 2, "Slytherin": 3}
+		self.y = data["Hogwarts House"].map(houses_map).reset_index(drop=True)
 
 		self.lr = lr
 		self.epochs = epochs
